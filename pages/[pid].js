@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import fs from "fs/promises";
 import path from "path";
 
-export default function ProductDetailPage({ product }) {
+function ProductDetailPage({ product }) {
   return (
     <Fragment>
       <h1> {product.title} </h1>
@@ -28,3 +28,28 @@ export async function getStaticProps(context) {
     },
   };
 }
+
+export async function getStaticPaths() {
+  return {
+    paths: [
+      {
+        params: {
+          pid: "p1",
+        },
+      },
+      {
+        params: {
+          pid: "p2",
+        },
+      },
+      {
+        params: {
+          pid: "p3",
+        },
+      },
+    ],
+    fallback: false,
+  };
+}
+
+export default ProductDetailPage;
