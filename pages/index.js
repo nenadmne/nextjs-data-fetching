@@ -12,6 +12,7 @@ function HomePage({ products }) {
 }
 
 export async function getStaticProps() {
+  //fs and path usage for dummy backend data
   const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
   const jsonData = await fs.readFile(filePath);
   const data = JSON.parse(jsonData);
@@ -20,6 +21,8 @@ export async function getStaticProps() {
     props: {
       products: data.products,
     },
+    //regenerating page every 10 seconds
+    revalidate: 10,
   };
 }
 
