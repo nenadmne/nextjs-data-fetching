@@ -29,6 +29,11 @@ export async function getStaticProps(context) {
   const data = await getData();
   const product = data.products.find((item) => item.id === productId);
 
+  // We do this if we have componenet with fallback set to true
+  if (!product) {
+    return { notFound: true };
+  }
+
   return {
     props: {
       product: product,
@@ -44,7 +49,7 @@ export async function getStaticPaths() {
   return {
     // paths should be array of objects where every object contains object with params and its value
     paths: params,
-    fallback: false,
+    fallback: true,
   };
 }
 export default ProductDetailPage;
